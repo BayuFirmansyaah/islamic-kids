@@ -169,4 +169,12 @@ nav{
   nav{
     background-color: darkorchid;
   }
+
+  .home{
+    height: 660px;
+  }
+
+  .home .wrap-text h1{
+    font-size: 28px;
+  }
 }
