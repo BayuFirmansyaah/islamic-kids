@@ -181,19 +181,29 @@ const render = (data) =>{
 			localStorage.setItem('count',count);
 			count = parseInt(localStorage.getItem('count'));
 			
-			// melakukan cek apakah soal sudah selesai
-			if(count>4){
-				localStorage.setItem('count',0);
-				localStorage.setItem('answer_true',0);
-				document.innerHTML="2"
-			}
 
-			// mengganti soal dan mereset button
-			await setTimeout(()=>{
+			// melakukan cek apakah soal sudah selesai
+			if(count<=4){
+				// mengganti soal dan mereset button
+				await setTimeout(()=>{
 				inserData(count,question,answer,data);
 				changeBg(id,"reset",answer);
-			},1000)
-
+				},1000)
+			}else{
+				// mereset value
+				localStorage.setItem('count',0);
+				localStorage.setItem('answer_true',0);
+				
+				if(answerTrue == 5 ){
+					answerTrue = "Semua"
+				}
+				
+				setTimeout(()=>{
+					$('.ucapan-selamat').html(`<h2>Selamat Kamu Berhasil Menjawab <br> ${answerTrue} Pertanyaan dengan benar</h2>`)
+					$('.wrap-appreciate').attr('style','display:block');
+					$('.main').attr('style','display:none');
+				},2000)
+			}
 
 		})
 	})
